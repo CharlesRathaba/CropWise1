@@ -11,9 +11,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //configure multer
-const upload = multer({ 
-  dest: process.env.NODE_ENV === 'production' ? '/tmp/upload/' : 'upload/' 
-});
+const upload = multer({ dest: "upload/" });
 app.use(express.json({ limit: "10mb" }));
 
 //initialize Google Generative AI
@@ -67,10 +65,8 @@ app.post("/analyze", upload.single("image"), async (req, res) => {
 app.post("/download", express.json(), async (req, res) => {
   const { result, image } = req.body;
   try {
-    const reportsDir = process.env.NODE_ENV === 'production' 
-      ? '/tmp/reports'
-      : path.join(__dirname, "reports");
     //Ensure the reports directory exists
+    const reportsDir = path.join(__dirname, "reports");
     await fsPromises.mkdir(reportsDir, { recursive: true });
     //generate pdf
     const filename = `plant_analysis_report_${Date.now()}.pdf`;
