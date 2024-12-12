@@ -18,9 +18,35 @@ app.use(express.json({ limit: "10mb" }));
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 app.use(express.static("public"));
 
+// Add near the top of the file
+const supportedLanguages = {
+  'en': 'English',
+  'af': 'Afrikaans',
+  'zu': 'isiZulu',
+  'xh': 'isiXhosa',
+  // Add other SA official languages
+};
+
+// Add near the analyze endpoint
+const SCAN_LIMITS = {
+  'free': 5,
+  'premium': Infinity,
+  'enterprise': Infinity
+};
+
 //routes
 //analyze
 app.post("/analyze", upload.single("image"), async (req, res) => {
+  const userTier = req.headers['user-tier'] || 'free';
+  const userId = req.headers['user-id'];
+  
+  // Check scan limits (implement this logic)
+  if (!await checkUserScanLimit(userId, userTier)) {
+    return res.status(403).json({ 
+      error: "Scan limit reached. Please upgrade to Premium for unlimited scans." 
+    });
+  }
+  const userLanguage = req.headers['accept-language'] || 'en';
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No image file uploaded" });
@@ -34,7 +60,9 @@ app.post("/analyze", upload.single("image"), async (req, res) => {
     // Use the Gemini model to analyze the image
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent([
-      "Analyze this plant image and provide detailed analysis of its species, health, and care recommendations, its characteristics, care instructions, and any interesting facts. Please provide the response in plain text without using any markdown formatting.",
+      `Analyze this plant image for South African farming conditions, considering local climate and common regional diseases. Provide detailed analysis of its species, health, and care recommendations. Include locally available treatment options and preventive measures specific to South African agriculture. ${
+        userTier === 'premium' ? 'Include detailed soil management and crop rotation recommendations.' : ''
+      }`,
       {
         inlineData: {
           mimeType: req.file.mimetype,
