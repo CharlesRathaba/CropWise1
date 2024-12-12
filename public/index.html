@@ -137,6 +137,102 @@
         color: #3498db;
         margin-right: 15px;
       }
+
+      /* Mobile Responsive Styles */
+      @media screen and (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+        
+        .container {
+          padding: 15px;
+        }
+
+        .cards {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .card {
+          width: 100%;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        h3 {
+          font-size: 18px;
+        }
+
+        .description {
+          font-size: 14px;
+        }
+
+        button {
+          padding: 10px;
+          font-size: 14px;
+        }
+
+        #result {
+          font-size: 14px;
+          padding: 15px;
+        }
+
+        .feature {
+          padding: 10px;
+        }
+
+        .feature-icon {
+          font-size: 20px;
+        }
+
+        /* Adjust image preview for mobile */
+        #imagePreview {
+          max-height: 200px;
+        }
+
+        /* Make upload area more touch-friendly */
+        .upload-area {
+          padding: 15px;
+          margin-bottom: 10px;
+        }
+
+        .upload-icon {
+          font-size: 36px;
+        }
+
+        .upload-text {
+          font-size: 14px;
+        }
+      }
+
+      /* Additional styles for very small screens */
+      @media screen and (max-width: 320px) {
+        body {
+          padding: 5px;
+        }
+
+        .container {
+          padding: 10px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        .upload-icon {
+          font-size: 28px;
+        }
+      }
     </style>
   </head>
   <body>
