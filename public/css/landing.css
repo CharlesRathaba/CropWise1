@@ -51,6 +51,9 @@ nav {
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    text-align: center;
 }
 
 .btn-primary {
@@ -58,18 +61,26 @@ nav {
     color: white;
 }
 
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-}
-
 .btn-secondary {
     background-color: transparent;
     color: var(--text-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-color);
+    transform: translateY(-2px);
 }
 
 .nav-buttons {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 /* Hero Section */
@@ -226,6 +237,20 @@ nav {
         width: 95%;
         padding: 2rem;
     }
+
+    .nav-container {
+        padding: 0.8rem;
+    }
+    
+    .nav-buttons {
+        gap: 0.5rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 0.4rem 0.8rem;
+        min-width: 80px;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -239,5 +264,19 @@ nav {
     
     .dialog-content input {
         padding: 0.6rem 0.8rem;
+    }
+
+    .logo span {
+        font-size: 1.2rem;
+    }
+    
+    .nav-buttons {
+        gap: 0.3rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 0.3rem 0.6rem;
+        min-width: 70px;
+        font-size: 0.85rem;
     }
 } 
