@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropWise: Plant Analysis</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>How to Use</h2>
+        <div class="cards">
+            <div class="card">
+                <i class="fas fa-upload card-icon"></i>
+                <h3>Upload</h3>
+                <p>Select or drag & drop a plant image</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-search card-icon"></i>
+                <h3>Analyze</h3>
+                <p>Click 'Analyze Plant' to process the image</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-file-pdf card-icon"></i>
+                <h3>Download</h3>
+                <p>Get your detailed PDF report</p>
+            </div>
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div id="dropArea" class="upload-area">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <p class="upload-text">Drag & drop your plant image here or click to select</p>
+                <input type="file" id="imageInput" name="image" accept="image/*" required />
+            </div>
+            <img id="imagePreview" alt="Image preview" style="display: none;" />
+            <button type="submit">
+                <i class="fas fa-search"></i> Analyze Plant
+            </button>
+        </form>
+
+        <div id="loading" style="display: none">
+            <i class="fas fa-spinner fa-spin"></i> Analyzing plant image...
+        </div>
+        <div id="result"></div>
+        <button id="downloadButton" style="display: none">
+            <i class="fas fa-file-pdf"></i> Download PDF Report
+        </button>
+    </div>
+
+    <script src="js/apiService.js"></script>
+    <script src="js/imageHandler.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
